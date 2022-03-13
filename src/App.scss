@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700;900&display=swap');
+$gap: 10px;
+$column-header-height: 46px;
+$column-footer-height: 46px;
+$column-boder-radius: 5px;
+
+$appbar-bg-color: #735185;
+$board-bg-color: #89609e;
+$list-bg-clor: #ebecf0;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-size: 14px;
+  line-height: 1.3em;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+.trello-master {
+  height: 100vh;
+  display: grid;
+  grid-template-rows: 40px 50px 1fr;
+  background: $board-bg-color;
+
+  .navbar {
+    padding: 0 $gap;
+    &.app {
+      background: $appbar-bg-color;
+      font-size: 1.5rem;
+    }
+    &.board {
+      background: $board-bg-color;
+      font-size: 1.1rem;
+    }
+  }
+  .board-columns {
+    display: flex;
+    margin: 0 $gap $gap;
+    overflow-x: auto;
+    &::-webkit-scrollbar {
+      height: 12px;
+    }
+    &::-webkit-scrollbar-track-piece {
+      background: #755286;
+      -webkit-border-radius: 10px;
+      border-radius: 10px;
+    }
+    &::-webkit-scrollbar-thumb {
+      -webkit-border-radius: 10px;
+      border-radius: 10px;
+      background: #ac97b7;
+    }
+    .column {
+      flex: 0 0 auto;
+      width: 300px;
+      height: calc(100% - $gap);
+      &:not(:first-child) {
+        margin-left: $gap;
+      }
+      > * {
+        background: $list-bg-clor;
+        color: #333;
+        padding: 0 8px;
+      }
+      header {
+        padding-left: 15px;
+        height: $column-header-height;
+        line-height: $column-header-height;
+        font-size: 16px;
+        font-weight: bold;
+        border-radius: $column-boder-radius $column-boder-radius 0 0;
+      }
+      footer {
+        padding-left: $gap;
+        height: $column-footer-height;
+        line-height: $column-footer-height;
+        font-size: 16px;
+        font-weight: bold;
+        border-radius: 0 0 $column-boder-radius $column-boder-radius;
+      }
+      ul {
+        list-style-type: none;
+        margin: 0;
+        max-height: calc(
+          100% - #{$column-header-height} - #{$column-footer-height}
+        );
+        overflow-y: auto;
+        &::-webkit-scrollbar {
+          width: 8px;
+        }
+        &::-webkit-scrollbar-track-piece {
+          background: #091e4214;
+          -webkit-border-radius: 10px;
+          border-radius: 10px;
+        }
+        &::-webkit-scrollbar-thumb {
+          -webkit-border-radius: 10px;
+          border-radius: 10px;
+          background: darken($list-bg-clor, 15);
+        }
+        li {
+          background: white;
+          padding: 8px;
+          border-radius: 4px;
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+          &:not(:last-child) {
+            margin-bottom: 8px;
+          }
+          img {
+            display: block;
+            width: calc(100% + 2 * #{$gap});
+            margin: -$gap 0 $gap (-$gap);
+          }
+        }
+      }
+    }
+  }
+}
